@@ -1,0 +1,170 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "SlimeWare", HidePremium = true, SaveConfig = false, ConfigFolder = "SlimeWare"})
+
+local PlayerTab = Window:MakeTab({
+	Name = "LocalPlayer",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local GunsTab = Window:MakeTab({
+	Name = "GunsTab",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local TeamTab = Window:MakeTab({
+	Name = "Team",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MiscTab = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = PlayerTab:AddSection({
+	Name = "Movement"
+})
+
+local Section = GunsTab:AddSection({
+	Name = "Guns"
+})
+
+local TeamSection = TeamTab:AddSection({
+	Name = "Team"
+})
+
+local Section = MiscTab:AddSection({
+	Name = "Miscellaneous"
+})
+
+
+PlayerTab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 0,
+	Max = 20,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "WS",
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+PlayerTab:AddSlider({
+	Name = "JumpPower",
+	Min = 0,
+	Max = 20,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "JP",
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end    
+})
+
+
+
+GunsTab:AddButton({
+	Name = "Get Remington-870",
+	Callback = function()
+        local args = {
+            [1] = workspace.Prison_ITEMS.giver:FindFirstChild("Remington 870").ITEMPICKUP
+        }
+        
+        workspace.Remote.ItemHandler:InvokeServer(unpack(args))
+  	end    
+})
+
+GunsTab:AddButton({
+	Name = "Get M9",
+	Callback = function()
+        local args = {
+            [1] = workspace.Prison_ITEMS.giver.M9.ITEMPICKUP
+        }
+        
+        workspace.Remote.ItemHandler:InvokeServer(unpack(args))
+  	end    
+})
+
+GunsTab:AddButton({
+	Name = "Get AK-47",
+	Callback = function()
+        local args = {
+            [1] = workspace.Prison_ITEMS.giver:FindFirstChild("AK-47").ITEMPICKUP
+        }
+        
+        workspace.Remote.ItemHandler:InvokeServer(unpack(args))
+  	end    
+})
+
+TeamTab:AddButton({
+	Name = "Switch to Inmate",
+	Callback = function()
+        local args = {
+            [1] = "Bright orange"
+        }
+        
+        workspace.Remote.TeamEvent:FireServer(unpack(args))
+        local args = {
+            [1] = PlayerName
+        }
+        
+        workspace.Remote.loadchar:InvokeServer(unpack(args))
+  	end    
+})
+
+TeamTab:AddButton({
+	Name = "Switch to guards",
+	Callback = function()
+        local args = {
+            [1] = "Bright blue"
+        }
+        
+        workspace.Remote.TeamEvent:FireServer(unpack(args))
+        local args = {
+            [1] = PlayerName
+        }
+        
+        workspace.Remote.loadchar:InvokeServer(unpack(args))
+  	end    
+})
+
+TeamTab:AddButton({
+	Name = "Switch to Neutral",
+	Callback = function()
+        local args = {
+            [1] = game:GetService("Players").LocalPlayer,
+            [2] = "Medium stone grey"
+        }
+        
+        workspace.Remote.loadchar:InvokeServer(unpack(args))
+        local args = {
+            [1] = PlayerName
+        }
+        
+        workspace.Remote.loadchar:InvokeServer(unpack(args)
+  	end    
+})
+
+MiscTab:AddButton({
+	Name = "Remove Doors",
+	Callback = function()
+      		game.Workspace.Doors:Destroy()
+  	end    
+})
+
+MiscTab:AddButton({
+	Name = "IY Admin",
+	Callback = function()
+         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+  	end    
+})
+
+OrionLib:Init()
